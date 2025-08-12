@@ -1,0 +1,10 @@
+trajectory
+maneuver
+adversary
+velocity
+explosion
+formation
+strategy
+resilience
+precision
+invincible

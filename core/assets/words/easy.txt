@@ -1,0 +1,10 @@
+cat
+dog
+jet
+sky
+run
+fire
+hit
+red
+blue
+fast

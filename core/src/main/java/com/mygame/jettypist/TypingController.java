@@ -35,22 +35,30 @@ public class TypingController extends InputAdapter {
             }
         }
         if (targetEnemy == null) {
+            EnemyJet nearest = null;
+            float nearestY = Float.MAX_VALUE;
             for (EnemyJet enemy : spawnManager.getEnemies()) {
                 if (enemy.word.length() > 0 && enemy.word.charAt(0) == character) {
-                    targetEnemy = enemy;
-                    wordProgress = 1;
-                    fireBullet(targetEnemy, 0);
-                    // Remove first letter from word
-                    targetEnemy.word = targetEnemy.word.substring(1);
-                    if (targetEnemy.word.length() == 0) {
-                        spawnManager.getEnemies().remove(targetEnemy);
-                        killCount++;
-                        hitRecord++;
-                        targetEnemy = null;
-                        wordProgress = 0;
+                    if (enemy.y < nearestY) {
+                        nearest = enemy;
+                        nearestY = enemy.y;
                     }
-                    return true;
                 }
+            }
+            if (nearest != null) {
+                targetEnemy = nearest;
+                wordProgress = 1;
+                fireBullet(targetEnemy, 0);
+                // Remove first letter from word
+                targetEnemy.word = targetEnemy.word.substring(1);
+                if (targetEnemy.word.length() == 0) {
+                    spawnManager.getEnemies().remove(targetEnemy);
+                    killCount++;
+                    hitRecord++;
+                    targetEnemy = null;
+                    wordProgress = 0;
+                }
+                return true;
             }
         } else {
             if (targetEnemy.word.length() > 0 && targetEnemy.word.charAt(0) == character) {

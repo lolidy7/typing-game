@@ -15,24 +15,29 @@ public class GameScreen implements Screen {
 	private Texture playerTexture;
 	private Texture heartFullTexture;
 	private Texture heartEmptyTexture;
+	private Texture enemyTexture;
 	private BitmapFont font;
 	private GlyphLayout layout;
 	private int lives = 5;
 	private int wpm = 72;
 	private int hitRecord = 15;
+	private SpawnManager spawnManager;
 
 	public GameScreen() {
 		batch = new SpriteBatch();
 		playerTexture = new Texture("images/player.png");
 		heartFullTexture = new Texture("images/heart_full.png");
 		heartEmptyTexture = new Texture("images/heart_empty.png");
+		enemyTexture = new Texture("images/enemy.png");
 		font = new BitmapFont();
 		layout = new GlyphLayout();
+		spawnManager = new SpawnManager(enemyTexture, font);
 	}
 
 	@Override
 	public void render(float delta) {
 		ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
+		spawnManager.update(delta);
 		batch.begin();
 		// Draw hearts (lives) in top-left
 		int heartSize = 32;
@@ -49,9 +54,13 @@ public class GameScreen implements Screen {
 		String hitText = "Hit Record: " + hitRecord;
 		layout.setText(font, hitText);
 		font.draw(batch, hitText, (Gdx.graphics.getWidth() - layout.width) / 2, Gdx.graphics.getHeight() - 20);
+		// Draw enemy jets
+		for (EnemyJet enemy : spawnManager.getEnemies()) {
+			enemy.render(batch);
+		}
 		// Draw player at bottom-center
 		int playerWidth = 64, playerHeight = 64;
-	batch.draw(playerTexture, (Gdx.graphics.getWidth() - playerWidth) / 2, 20, playerWidth, playerHeight);
+		batch.draw(playerTexture, (Gdx.graphics.getWidth() - playerWidth) / 2, 20, playerWidth, playerHeight);
 		batch.end();
 	}
 
@@ -69,8 +78,9 @@ public class GameScreen implements Screen {
 	public void dispose() {
 		batch.dispose();
 		playerTexture.dispose();
-	heartFullTexture.dispose();
-	heartEmptyTexture.dispose();
+		heartFullTexture.dispose();
+		heartEmptyTexture.dispose();
+		enemyTexture.dispose();
 		font.dispose();
 	}
 }

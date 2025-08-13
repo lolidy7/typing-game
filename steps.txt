@@ -19,7 +19,7 @@ Prompt to agent:
 
     Create EnemyJet class with position, word, and a method to render itself with its word above it.
     Add a SpawnManager to spawn 4–5 EnemyJet objects at random X positions near the top every 5 seconds.
-    For now, enemy jets just float slowly downward.
+    For now, enemy jets just float slowly   downward.
     Commit as Milestone 4: enemies spawn and move.
 
 Step 7 — Typing Combat
@@ -92,6 +92,6 @@ Prompt to agent:
             Add simple explosion effect when enemies die.
 
             Add sound effects for shooting, enemy hit, and player hit.
-        
+
             Add background with parallax clouds.
         Commit as Milestone 10: polished gameplay.

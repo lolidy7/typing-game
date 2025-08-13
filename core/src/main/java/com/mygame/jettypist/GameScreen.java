@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameScreen implements Screen {
+	private Texture battlezoneTexture;
 	private final JetTypist game;
 	private SpriteBatch batch;
 	private ParallaxBackground background;
@@ -40,6 +41,7 @@ public class GameScreen implements Screen {
 	private int lastLifeRewardKillCount = 0;
 
 	public GameScreen(JetTypist game) {
+	battlezoneTexture = new Texture("images/battlezone.png");
 		this.game = game;
 		batch = new SpriteBatch();
 		background = new ParallaxBackground("images/clouds.png", 30f, 3);
@@ -142,14 +144,11 @@ public class GameScreen implements Screen {
 		}
 		lastLifeRewardKillCount = killCount;
 
-		batch.begin();
-		// Draw hearts (lives) in top-left
-		int heartSize = 32;
-		int heartPadding = 8;
-		for (int i = 0; i < 5; i++) {
-			Texture heart = i < lives ? heartFullTexture : heartEmptyTexture;
-			batch.draw(heart, 10 + i * (heartSize + heartPadding), Gdx.graphics.getHeight() - heartSize - 10, heartSize, heartSize);
-		}
+	batch.begin();
+	// --- Background rendering ---
+	int screenWidth = Gdx.graphics.getWidth();
+	// 1. Battlezone (static at bottom)
+	batch.draw(battlezoneTexture, 0, 0, screenWidth, battlezoneTexture.getHeight());
 		// Draw WPM in top-right
 		String wpmText = "WPM: " + wpm;
 		layout.setText(font, wpmText);
@@ -188,6 +187,7 @@ public class GameScreen implements Screen {
 	public void resume() {}
 	@Override
 	public void dispose() {
+	battlezoneTexture.dispose();
 		batch.dispose();
 		playerTexture.dispose();
 		heartFullTexture.dispose();

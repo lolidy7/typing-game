@@ -30,7 +30,8 @@ public class GameScreen implements Screen {
 	private List<Fireball> fireballs;
 	private int lives = 5;
 	private static final int MAX_LIVES = 5;
-	private int wpm = 72;
+	private float elapsedTime = 0f;
+	private int wpm = 0;
 	private int hitRecord = 0;
 	private int killCount = 0;
 	private boolean gameOver = false;
@@ -59,6 +60,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		elapsedTime += delta;
 		if (gameOver) {
 			ScreenUtils.clear(0, 0, 0, 1);
 			batch.begin();
@@ -121,6 +123,13 @@ public class GameScreen implements Screen {
 		// Sync hit record, kill count from TypingController
 		hitRecord = typingController.getHitRecord();
 		killCount = typingController.getKillCount();
+
+		// WPM calculation: (completedWords / elapsedSeconds) * 60
+		if (elapsedTime > 0) {
+			wpm = (int)((killCount / elapsedTime) * 60f);
+		} else {
+			wpm = 0;
+		}
 
 		// Reward: every 2 kills, add 1 life (max 5), only once per threshold
 		if (killCount / 2 > lastLifeRewardKillCount / 2 && killCount % 2 == 0 && lives < MAX_LIVES) {

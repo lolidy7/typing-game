@@ -70,11 +70,11 @@ public class SpawnManager {
         if (scaled) {
             if (difficultyLevel == 1) {
                 words = mediumWords;
-                enemySpeed = 60f;
+                enemySpeed = 50f;
                 spawnInterval = 1.0f;
             } else if (difficultyLevel >= 2) {
                 words = hardWords;
-                enemySpeed = 80f;
+                enemySpeed = 60f;
                 spawnInterval = 0.7f;
             }
             pauseTimer = PAUSE_AFTER_SCALE;

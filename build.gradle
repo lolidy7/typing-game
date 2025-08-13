@@ -71,3 +71,4 @@ subprojects {
 }
 
 eclipse.project.name = 'jet-typist' + '-parent'
+

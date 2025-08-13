@@ -1,0 +1,147 @@
+.
+├── assets
+│   ├── assets.txt
+│   └── libgdx.png
+├── build
+│   └── reports
+│       └── problems
+│           └── problems-report.html
+├── build.gradle
+├── core
+│   ├── assets
+│   │   ├── fonts
+│   │   │   └── arial.ttf
+│   │   ├── images
+│   │   │   ├── bullet.png
+│   │   │   ├── empty_heart.png
+│   │   │   ├── enemy_jet.png
+│   │   │   ├── enemy.png
+│   │   │   ├── fireball.png
+│   │   │   ├── full_heart.png
+│   │   │   ├── heart_empty.png
+│   │   │   ├── heart_full.png
+│   │   │   └── player.png
+│   │   ├── sounds
+│   │   │   ├── explode.wav
+│   │   │   ├── hit.wav
+│   │   │   └── shoot.wav
+│   │   └── words
+│   │       ├── easy.txt
+│   │       ├── hard.txt
+│   │       └── medium.txt
+│   ├── build
+│   │   ├── classes
+│   │   │   └── java
+│   │   │       ├── main
+│   │   │       │   └── com
+│   │   │       │       └── mygame
+│   │   │       │           └── jettypist
+│   │   │       │               ├── GameScreen.class
+│   │   │       │               └── JetTypist.class
+│   │   │       └── test
+│   │   ├── generated
+│   │   │   └── sources
+│   │   │       ├── annotationProcessor
+│   │   │       │   └── java
+│   │   │       │       └── main
+│   │   │       └── headers
+│   │   │           └── java
+│   │   │               └── main
+│   │   ├── libs
+│   │   │   └── core-1.0.0.jar
+│   │   ├── resources
+│   │   │   ├── main
+│   │   │   │   └── images
+│   │   │   │       ├── empty_heart.png
+│   │   │   │       ├── full_heart.png
+│   │   │   │       └── player.png
+│   │   │   └── test
+│   │   └── tmp
+│   │       ├── compileJava
+│   │       │   ├── compileTransaction
+│   │       │   │   ├── backup-dir
+│   │       │   │   └── stash-dir
+│   │       │   │       ├── GameScreen.class.uniqueId0
+│   │       │   │       └── JetTypist.class.uniqueId1
+│   │       │   └── previous-compilation-data.bin
+│   │       └── jar
+│   │           └── MANIFEST.MF
+│   ├── build.gradle
+│   └── src
+│       └── main
+│           └── java
+│               └── com
+│                   └── mygame
+│                       └── jettypist
+│                           ├── GameScreen.java
+│                           └── JetTypist.java
+├── gdx-liftoff-1.13.5.1.jar
+├── gradle
+│   ├── gradle-daemon-jvm.properties
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradle.properties
+├── gradlew
+├── gradlew.bat
+├── lwjgl3
+│   ├── build
+│   │   ├── classes
+│   │   │   └── java
+│   │   │       ├── main
+│   │   │       │   └── com
+│   │   │       │       └── mygame
+│   │   │       │           └── jettypist
+│   │   │       │               └── lwjgl3
+│   │   │       │                   ├── Lwjgl3Launcher.class
+│   │   │       │                   └── StartupHelper.class
+│   │   │       └── test
+│   │   ├── generated
+│   │   │   └── sources
+│   │   │       ├── annotationProcessor
+│   │   │       │   └── java
+│   │   │       │       └── main
+│   │   │       └── headers
+│   │   │           └── java
+│   │   │               └── main
+│   │   ├── resources
+│   │   │   ├── main
+│   │   │   │   ├── assets.txt
+│   │   │   │   ├── libgdx128.png
+│   │   │   │   ├── libgdx16.png
+│   │   │   │   ├── libgdx32.png
+│   │   │   │   ├── libgdx64.png
+│   │   │   │   └── libgdx.png
+│   │   │   └── test
+│   │   └── tmp
+│   │       └── compileJava
+│   │           ├── compileTransaction
+│   │           │   ├── backup-dir
+│   │           │   └── stash-dir
+│   │           │       └── Lwjgl3Launcher.class.uniqueId0
+│   │           └── previous-compilation-data.bin
+│   ├── build.gradle
+│   ├── icons
+│   │   ├── logo.icns
+│   │   ├── logo.ico
+│   │   └── logo.png
+│   ├── nativeimage.gradle
+│   └── src
+│       └── main
+│           ├── java
+│           │   └── com
+│           │       └── mygame
+│           │           └── jettypist
+│           │               └── lwjgl3
+│           │                   ├── Lwjgl3Launcher.java
+│           │                   └── StartupHelper.java
+│           └── resources
+│               ├── libgdx128.png
+│               ├── libgdx16.png
+│               ├── libgdx32.png
+│               └── libgdx64.png
+├── README.md
+├── settings.gradle
+└── tree.txt
+
+81 directories, 64 files

@@ -1,0 +1,97 @@
+Step 5 — Base Game Screen
+
+Prompt to agent:
+
+    Create GameScreen implementing LibGDX’s Screen interface.
+    Display the player sprite at bottom-center and draw the HUD with:
+
+        Lives: 5 hearts in top-left
+
+        WPM: dummy number in top-right
+
+        Hit Record: dummy number top-center
+        No movement or typing yet — just render the HUD and player.
+        Commit as Milestone 3: HUD and player appear.
+
+Step 6 — Enemy Jets and Words
+
+Prompt to agent:
+
+    Create EnemyJet class with position, word, and a method to render itself with its word above it.
+    Add a SpawnManager to spawn 4–5 EnemyJet objects at random X positions near the top every 5 seconds.
+    For now, enemy jets just float slowly downward.
+    Commit as Milestone 4: enemies spawn and move.
+
+Step 7 — Typing Combat
+
+Prompt to agent:
+
+    Create a TypingController that:
+
+        Captures player keyboard input.
+
+        When first typed letter matches an enemy’s current word, lock that enemy as the target.
+
+        Each correct letter fires a bullet towards that enemy and advances the word progress.
+
+        On word completion: remove enemy, increment hit record, and increment a kill counter.
+
+        Every 2 kills: add 1 life (max 5).
+        Commit as Milestone 5: basic typing combat works.
+
+Step 8 — Enemy Fire
+
+Prompt to agent:
+
+    Each enemy has a fire timer (5 seconds).
+    When the timer triggers, spawn a fireball projectile aimed at the player.
+    If a fireball reaches the player, reduce lives by 1.
+    When lives reach 0, switch to a Game Over screen.
+    Commit as Milestone 6: enemies shoot and player can die.
+
+Step 9 — Difficulty Scaling
+
+Prompt to agent:
+
+    Add scaling so that every 30 seconds or after 20 kills:
+
+        Increase enemy speed.
+
+        Shorten spawn interval.
+
+        Use longer/harder words from medium.txt then hard.txt.
+        Commit as Milestone 7: difficulty increases over time.
+
+Step 10 — WPM and Final HUD
+
+Prompt to agent:
+
+    Implement WPM calculation as (completedWords / elapsedSeconds) * 60.
+    Display live WPM in HUD.
+    Ensure Hit Record shows total enemies destroyed.
+    Commit as Milestone 8: WPM & final HUD.
+
+Step 11 — Game Over Screen
+
+Prompt to agent:
+
+    Create a Game Over screen that displays:
+
+        Final WPM
+
+        Final Hit Record
+
+        Total survival time
+        Add a “Restart” button that starts a new GameScreen.
+        Commit as Milestone 9: Game Over screen complete.
+
+Step 12 — Polish
+
+Prompt to agent:
+
+        Add simple explosion effect when enemies die.
+
+        Add sound effects for shooting, enemy hit, and player hit.
+
+        Add background with parallax clouds.
+        Commit as Milestone 10: polished gameplay.

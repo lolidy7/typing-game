@@ -15,6 +15,9 @@ import java.util.List;
 public class GameScreen implements Screen {
 	private final JetTypist game;
 	private SpriteBatch batch;
+	private ParallaxBackground background;
+	private List<Explosion> explosions;
+	private SoundManager soundManager;
 	private Texture playerTexture;
 	private Texture heartFullTexture;
 	private Texture heartEmptyTexture;
@@ -39,6 +42,9 @@ public class GameScreen implements Screen {
 	public GameScreen(JetTypist game) {
 		this.game = game;
 		batch = new SpriteBatch();
+		background = new ParallaxBackground("images/clouds.png", 30f, 3);
+		explosions = new ArrayList<>();
+		soundManager = new SoundManager();
 		playerTexture = new Texture("images/player.png");
 		heartFullTexture = new Texture("images/heart_full.png");
 		heartEmptyTexture = new Texture("images/heart_empty.png");
@@ -52,7 +58,7 @@ public class GameScreen implements Screen {
 		spawnManager = new SpawnManager(enemyTexture, font);
 		bullets = new ArrayList<>();
 		fireballs = new ArrayList<>();
-		typingController = new TypingController(spawnManager, bullets);
+		typingController = new TypingController(spawnManager, bullets, soundManager);
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(typingController);
 		Gdx.input.setInputProcessor(multiplexer);
@@ -101,6 +107,7 @@ public class GameScreen implements Screen {
 				fireball.active = false;
 				if (lives > 0) {
 					lives--;
+					soundManager.playPlayerHit();
 					if (lives <= 0) gameOver = true;
 				}
 			}

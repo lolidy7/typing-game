@@ -9,12 +9,14 @@ public class TypingController extends InputAdapter {
     private int wordProgress = 0;
     private final SpawnManager spawnManager;
     private final List<Bullet> bullets;
+    private final SoundManager soundManager;
     private int killCount = 0;
     private int hitRecord = 0;
 
-    public TypingController(SpawnManager spawnManager, List<Bullet> bullets) {
+    public TypingController(SpawnManager spawnManager, List<Bullet> bullets, SoundManager soundManager) {
         this.spawnManager = spawnManager;
         this.bullets = bullets;
+        this.soundManager = soundManager;
     }
 
     public int getKillCount() { return killCount; }
@@ -65,6 +67,7 @@ public class TypingController extends InputAdapter {
                 fireBullet(targetEnemy, 0);
                 targetEnemy.word = targetEnemy.word.substring(1);
                 if (targetEnemy.word.length() == 0) {
+                    soundManager.playEnemyHit();
                     spawnManager.getEnemies().remove(targetEnemy);
                     killCount++;
                     hitRecord++;
@@ -80,5 +83,7 @@ public class TypingController extends InputAdapter {
     private void fireBullet(EnemyJet enemy, int letterIndex) {
         // Add a bullet aimed at the enemy (optionally at the letterIndex position)
         bullets.add(new Bullet(enemy, letterIndex));
+        // Play shooting sound
+        soundManager.playShoot();
     }
 }

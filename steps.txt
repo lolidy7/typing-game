@@ -85,13 +85,13 @@ Prompt to agent:
         Add a “Restart” button that starts a new GameScreen.
         Commit as Milestone 9: Game Over screen complete.
 
-Step 12 — Polish
+    Step 12 — Polish
 
-Prompt to agent:
+    Prompt to agent:
 
-        Add simple explosion effect when enemies die.
+            Add simple explosion effect when enemies die.
 
-        Add sound effects for shooting, enemy hit, and player hit.
-
-        Add background with parallax clouds.
+            Add sound effects for shooting, enemy hit, and player hit.
+        
+            Add background with parallax clouds.
         Commit as Milestone 10: polished gameplay.

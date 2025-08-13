@@ -3,27 +3,43 @@ package com.mygame.jettypist;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class JetTypist extends ApplicationAdapter {
-    private GameScreen gameScreen;
+    private Screen currentScreen;
 
     @Override
     public void create() {
-        gameScreen = new GameScreen();
+        startGame();
+    }
+
+    private void startGame() {
+    if (currentScreen != null) currentScreen.dispose();
+    GameScreen gameScreen = new GameScreen(this);
+    currentScreen = gameScreen;
+    currentScreen.show();
+    }
+
+    public void showGameOver(final int wpm, final int hitRecord, final int seconds) {
+        if (currentScreen != null) currentScreen.dispose();
+        currentScreen = new GameOverScreen(wpm, hitRecord, seconds, new Runnable() {
+            @Override
+            public void run() {
+                startGame();
+            }
+        });
+        currentScreen.show();
     }
 
     @Override
     public void render() {
-        gameScreen.render(Gdx.graphics.getDeltaTime());
+        if (currentScreen != null) currentScreen.render(Gdx.graphics.getDeltaTime());
     }
 
     @Override
     public void dispose() {
-        gameScreen.dispose();
+        if (currentScreen != null) currentScreen.dispose();
     }
 }

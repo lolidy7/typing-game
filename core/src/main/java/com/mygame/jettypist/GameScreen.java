@@ -3,18 +3,17 @@ package com.mygame.jettypist;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.Input;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameScreen implements Screen {
+	private final JetTypist game;
 	private SpriteBatch batch;
 	private Texture playerTexture;
 	private Texture heartFullTexture;
@@ -37,7 +36,8 @@ public class GameScreen implements Screen {
 	private boolean gameOver = false;
 	private int lastLifeRewardKillCount = 0;
 
-	public GameScreen() {
+	public GameScreen(JetTypist game) {
+		this.game = game;
 		batch = new SpriteBatch();
 		playerTexture = new Texture("images/player.png");
 		heartFullTexture = new Texture("images/heart_full.png");
@@ -62,12 +62,10 @@ public class GameScreen implements Screen {
 	public void render(float delta) {
 		elapsedTime += delta;
 		if (gameOver) {
-			ScreenUtils.clear(0, 0, 0, 1);
-			batch.begin();
-			String over = "GAME OVER";
-			layout.setText(font, over);
-			font.draw(batch, over, (Gdx.graphics.getWidth() - layout.width) / 2, Gdx.graphics.getHeight() / 2);
-			batch.end();
+			int finalWpm = wpm;
+			int finalHit = hitRecord;
+			int finalSeconds = (int)elapsedTime;
+			game.showGameOver(finalWpm, finalHit, finalSeconds);
 			return;
 		}
 		ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);

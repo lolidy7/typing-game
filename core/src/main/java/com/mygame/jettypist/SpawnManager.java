@@ -19,6 +19,11 @@ public class SpawnManager {
     private final float maxX = screenWidth - EnemyJet.WIDTH;
     private final List<EnemyJet> enemies = new ArrayList<>();
     private final Random random = new Random();
+    private int playerLives = 5;
+    private boolean gameOver = false;
+
+    public int getPlayerLives() { return playerLives; }
+    public boolean isGameOver() { return gameOver; }
 
     public SpawnManager(Texture enemyTexture, BitmapFont font) {
         this.enemyTexture = enemyTexture;
@@ -47,6 +52,10 @@ public class SpawnManager {
             // Remove if reached player
             if (enemy.y <= playerY) {
                 enemies.remove(i);
+                playerLives--;
+                if (playerLives <= 0) {
+                    gameOver = true;
+                }
             }
         }
     }

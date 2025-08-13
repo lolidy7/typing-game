@@ -11,8 +11,6 @@ public class TypingController extends InputAdapter {
     private final List<Bullet> bullets;
     private int killCount = 0;
     private int hitRecord = 0;
-    private int lives = 5;
-    private static final int MAX_LIVES = 5;
 
     public TypingController(SpawnManager spawnManager, List<Bullet> bullets) {
         this.spawnManager = spawnManager;
@@ -21,7 +19,6 @@ public class TypingController extends InputAdapter {
 
     public int getKillCount() { return killCount; }
     public int getHitRecord() { return hitRecord; }
-    public int getLives() { return lives; }
 
     @Override
     public boolean keyTyped(char character) {
@@ -49,9 +46,6 @@ public class TypingController extends InputAdapter {
                         spawnManager.getEnemies().remove(targetEnemy);
                         killCount++;
                         hitRecord++;
-                        if (killCount % 2 == 0 && lives < MAX_LIVES) {
-                            lives++;
-                        }
                         targetEnemy = null;
                         wordProgress = 0;
                     }
@@ -66,9 +60,6 @@ public class TypingController extends InputAdapter {
                     spawnManager.getEnemies().remove(targetEnemy);
                     killCount++;
                     hitRecord++;
-                    if (killCount % 2 == 0 && lives < MAX_LIVES) {
-                        lives++;
-                    }
                     targetEnemy = null;
                     wordProgress = 0;
                 }

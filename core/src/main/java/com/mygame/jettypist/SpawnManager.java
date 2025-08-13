@@ -31,8 +31,23 @@ public class SpawnManager {
             timer = 0f;
             spawnEnemy();
         }
-        for (EnemyJet enemy : enemies) {
-            enemy.y -= 40 * delta; // Move down at 40 px/sec
+        float playerX = 400; // Center X (player at bottom center)
+        float playerY = 32;  // Player Y threshold
+        for (int i = enemies.size() - 1; i >= 0; i--) {
+            EnemyJet enemy = enemies.get(i);
+            // Move toward player
+            float dx = playerX - (enemy.x + EnemyJet.WIDTH / 2f);
+            float dy = playerY - (enemy.y + EnemyJet.HEIGHT / 2f);
+            float dist = (float)Math.sqrt(dx*dx + dy*dy);
+            float speed = 40f;
+            if (dist > 1e-3) {
+                enemy.x += (dx / dist) * speed * delta;
+                enemy.y += (dy / dist) * speed * delta;
+            }
+            // Remove if reached player
+            if (enemy.y <= playerY) {
+                enemies.remove(i);
+            }
         }
     }
 

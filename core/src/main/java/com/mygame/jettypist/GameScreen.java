@@ -9,6 +9,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.Input;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameScreen implements Screen {
 	private SpriteBatch batch;
@@ -16,12 +20,16 @@ public class GameScreen implements Screen {
 	private Texture heartFullTexture;
 	private Texture heartEmptyTexture;
 	private Texture enemyTexture;
+	private Texture bulletTexture;
 	private BitmapFont font;
 	private GlyphLayout layout;
+	private SpawnManager spawnManager;
+	private TypingController typingController;
+	private List<Bullet> bullets;
 	private int lives = 5;
 	private int wpm = 72;
-	private int hitRecord = 15;
-	private SpawnManager spawnManager;
+	private int hitRecord = 0;
+	private int killCount = 0;
 
 	public GameScreen() {
 		batch = new SpriteBatch();
@@ -29,15 +37,34 @@ public class GameScreen implements Screen {
 		heartFullTexture = new Texture("images/heart_full.png");
 		heartEmptyTexture = new Texture("images/heart_empty.png");
 		enemyTexture = new Texture("images/enemy.png");
+		bulletTexture = new Texture("images/bullet.png");
+		Bullet.setTexture(bulletTexture);
 		font = new BitmapFont();
 		layout = new GlyphLayout();
 		spawnManager = new SpawnManager(enemyTexture, font);
+		bullets = new ArrayList<>();
+		typingController = new TypingController(spawnManager, bullets);
+		InputMultiplexer multiplexer = new InputMultiplexer();
+		multiplexer.addProcessor(typingController);
+		Gdx.input.setInputProcessor(multiplexer);
 	}
 
 	@Override
 	public void render(float delta) {
 		ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
 		spawnManager.update(delta);
+		// Update bullets
+		for (Bullet bullet : bullets) {
+			bullet.update(delta);
+		}
+		// Remove inactive bullets
+		bullets.removeIf(b -> !b.active);
+
+		// Sync lives, hit record, kill count from TypingController
+		lives = typingController.getLives();
+		hitRecord = typingController.getHitRecord();
+		killCount = typingController.getKillCount();
+
 		batch.begin();
 		// Draw hearts (lives) in top-left
 		int heartSize = 32;
@@ -57,6 +84,10 @@ public class GameScreen implements Screen {
 		// Draw enemy jets
 		for (EnemyJet enemy : spawnManager.getEnemies()) {
 			enemy.render(batch);
+		}
+		// Draw bullets
+		for (Bullet bullet : bullets) {
+			bullet.render(batch);
 		}
 		// Draw player at bottom-center
 		int playerWidth = 64, playerHeight = 64;
@@ -81,6 +112,7 @@ public class GameScreen implements Screen {
 		heartFullTexture.dispose();
 		heartEmptyTexture.dispose();
 		enemyTexture.dispose();
+		bulletTexture.dispose();
 		font.dispose();
 	}
 }
